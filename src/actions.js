@@ -3,10 +3,18 @@
 //액션의 type속성을 확인하고 리듀서와 관련된 액션에 따라 리듀서가 리턴한 겂을 업데이트 해줌
 
 export const ADD_BOOK = 'ADD_BOOK'
+export const REMOVE_BOOK = 'REMOVE_BOOK'
+import{ v4 as uuid } from 'uuid'
 
-export function addBook(book){  // type 값과 다루고 싶은 객체를 전달.
+export function addBook(book){  // type 값과 다루고 싶은 객체를 전달.  액션은 리듀서로 액션이 전달됨
   return{
     type:ADD_BOOK,
+    book
+  }
+}
+export function removeBook(book){
+  return{
+    type:REMOVE_BOOK,
     book
   }
 }

@@ -15,7 +15,7 @@ import {
 
 import  { connect } from 'react-redux'
 
-import { addBook } from './actions'
+import { addBook, removeBook} from './actions'
 
 const initialState = {
   name:'',
@@ -39,6 +39,10 @@ class Books extends React.Component {
     this.setState(initialState)
   }
 
+  removeBook = (book) => {
+    this.props.dispatchRemoveBook(book)
+  }
+
   render(){
     const {books} = this.props // connect 함수가 books 배열을 반환하므로 이 배열을 props 로 참조 가능
 
@@ -53,6 +57,7 @@ class Books extends React.Component {
                 <View style={styles.book} key={index}>
                   <Text style={styles.name}>{book.name}</Text>
                   <Text style={styles.author}>{book.author}</Text>
+                  <Text onPress={() => this.removeBook(book)}>Remove</Text>
                 </View>
               ))
             }
@@ -148,7 +153,8 @@ const mapStateToProps = (state) => ({
 // connect 함수의 첫번째 인자로 사용되며 mapStateToProps 에서 생성해주는 객체값을 Books 컴포넌트에서 사용가능하도록 connect 함수 사용
 
 const mapDispatchToProps = {
-  dispatchAddBook: (book) => addBook(book)
+  dispatchAddBook: (book) => addBook(book),
+  dispatchRemoveBook: (book) => removeBook(book)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Books)

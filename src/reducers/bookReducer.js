@@ -2,9 +2,12 @@
 //리듀서는 데이터의 저장소
 
 import { ADD_BOOK, REMOVE_BOOK } from '../actions'
+import 'react-native-get-random-values';
+import { v4 as uuid } from 'uuid';
+
 
 const initialState = {
-  books : [{name:'East of Eden', author:'John Steinbeck'}]
+  books : [{name:'East of Eden', author:'John Steinbeck', id:uuid()}]
 }
 
 const bookReducer = (state = initialState, action) => {
@@ -16,8 +19,16 @@ const bookReducer = (state = initialState, action) => {
           action.book
         ]
       }
-      default:
-        return state
+    case REMOVE_BOOK:
+      const index = state.books.findIndex(book => book.id === action.book.id)
+      return{
+        books:[
+          ...state.books.slice(0,index),
+          ...state.books.slice(index+1)
+        ]
+      }
+    default:
+      return state
   }
 }
 
