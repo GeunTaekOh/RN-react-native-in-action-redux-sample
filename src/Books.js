@@ -34,7 +34,7 @@ class Books extends React.Component {
     })
   }
 
-  addBook = () => {
+  addBook = () => {  //onclick 할때 여기로 넘어오고 인자가 필요없는 addbook 에서는 dispatch add book 호출. dispatch add book 은 actions.js 의 add book 으로 넘어감
     this.props.dispatchAddBook(this.state)
     this.setState(initialState)
   }
